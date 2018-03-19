@@ -16,6 +16,7 @@ data "archive_file" "lambda_archive" {
 resource "null_resource" "create_lambda_zip" {
   triggers = {
     lambda_code = "${sha1(file("${local.function_folder}/${var.function_filename}.py"))}"
+    lambda_code = "${sha1(file("${local.function_folder}/requirements.in"))}"
   }
 
   provisioner "local-exec" {
