@@ -4,15 +4,9 @@ variable "function_filename" {
 }
 
 variable "function_folder" {
-  default     = "code"
   description = "The folder where you lambda function code is stored."
 }
 
 variable "python_runtime" {
   default = "python3.6"
-}
-
-variable "virtualenv_name" {
-  default     = "terraform-ve"
-  description = "The name of the virtualenv to be created for your lambda function."
 }

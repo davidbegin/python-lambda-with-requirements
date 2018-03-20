@@ -1,4 +1,4 @@
-## python-lambda-with-requirements 
+## python-lambda-with-requirements
 
 A Terraform module for taking a single python file and requirements file and zipping them together for a Lambda function.
 
@@ -7,10 +7,15 @@ variable "function_filename" {
   default = "lambda_function"
 }
 
+variable "function_folder" {
+  default = "code"
+}
+
 module "lambda_zip" {
   source = "git@github.com:davidbegin/python-lambda-with-requirements.git"
-  
+
   function_filename = "${var.function_filename}"
+  function_folder= "${var.function_folder}"
 }
 
 resource "aws_lambda_function" "test_lambda" {
@@ -49,9 +54,8 @@ EOF
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | function_filename | The name of the file for your lambda function. | string | `lambda_function` | no |
-| function_folder | The folder where you lambda function code is stored. | string | `code` | no |
+| function_folder | The folder where you lambda function code is stored. | string | - | yes |
 | python_runtime |  | string | `python3.6` | no |
-| virtualenv_name | The name of the virtualenv to be created for your lambda function. | string | `terraform-ve` | no |
 
 ## Outputs
 
@@ -59,4 +63,3 @@ EOF
 |------|-------------|
 | filename |  |
 | source_code_hash |  |
-
